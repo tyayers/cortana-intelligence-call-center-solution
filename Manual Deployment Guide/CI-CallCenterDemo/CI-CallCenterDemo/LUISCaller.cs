@@ -44,7 +44,7 @@ namespace ContosoInsurance_CallCenterDemo
     /// </summary>
     public class LUISCaller
     {
-        public static readonly string AccessUri = "https://api.projectoxford.ai/luis/v1/application?";
+        public static readonly string AccessUri = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/";
         private string AppId = ConfigurationManager.AppSettings["luisAppID"];
         private string AppIdCh = ConfigurationManager.AppSettings["luisAppIDChinese"];
         private string luisAPIAccountKey = ConfigurationManager.AppSettings["luisAPIAccountKey"];
@@ -59,12 +59,12 @@ namespace ContosoInsurance_CallCenterDemo
         {
            // If clientid or client secret has special characters, encode before sending request 
             if (this._recoLanguage == "zh-CN")
-                this.request = string.Format("id={0}&subscription-key={1}&q={2}",
+                this.request = string.Format("{0}?subscription-key={1}&verbose=true&q={2}",
                               HttpUtility.UrlEncode(AppIdCh),
                               HttpUtility.UrlEncode(luisAPIAccountKey),
                               HttpUtility.UrlEncode(message.Replace("?", "")));
             else
-                this.request = string.Format("id={0}&subscription-key={1}&q={2}",
+                this.request = string.Format("{0}?subscription-key={1}&verbose=true&q={2}",
                                           HttpUtility.UrlEncode(AppId),
                                           HttpUtility.UrlEncode(luisAPIAccountKey),
                                           HttpUtility.UrlEncode(message.Replace("?", "")));
